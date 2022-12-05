@@ -14,9 +14,7 @@ All that being said, it is suprisingly difficult to predict the outcome of NBA m
 # Dataset
 Game data can be divided into regular and advanced statistics. Examples of regular statistics are points per game (PPG), two-point shooting percentage (2P%) and three-point shooting percentage (3P%). For advanced statistics, often a combination of different statistics is done. For example, true shooting percentage (TS%) takes into account two-point, three-point and free throw shooting. The purpose of using advanced statistics is to capture nuances about a team that cannot be seen using regular statistics - for example, taking into account the pace or the number of possessions a team has in a game.
 
-For game outcome prediction, both regular and advanced team statistics were used. The data collected was from regular seasons games (playoffs not included) between the 2013 to 2021 seasons (over 10,000 matches). In a typical supervised machine learning problem, the outcome of the game was used as the label, and team statistics for both home and visitor team were used as features. 
-
-For team win percentage prediction, only advanced team statistics was used. In this case, regular season data from 2001 to 2021 was used. The win percentage (number of wins over total number of games) in a given season was used as the target, and the team statistics for that season were used as features. 
+For game outcome prediction, both regular and advanced team statistics were used. The data collected was from regular seasons games (playoffs not included) between the 2013 to 2021 seasons (over 10,000 matches). This time window was chosen having in mind that NBA rules and strategies evolve over time, meaning that older data may not be as meaningful in predicting more recent games. As in a typical supervised machine learning problem, the outcome of the game was used as the target or label, and team statistics for both home and visitor team were used as features. 
 
 # Hypotheses
 Before actually working with the data, several hypotheses of what impacts game results were proposed: 
@@ -43,7 +41,7 @@ One of the first hypotheses raised was that teams playing at home are more likel
 It is also interesting to look at the home and visitor wins in each season to get a better idea of how this factor affects the outcome of games. This information is shown below. While the home team does win more often than the visitors, it does not seem like home court advantage is a deciding factor. One can also notice a decrease in the effect of homecourt advantage starting on the 2019 season - this is due to the COVID-19 pandemic, when teams had to play with no or limited attendance. 
 ![Win percentage  for home and visitor teams in each season](saves/images/yearly_win_percent.png)
 
-During EDA, it was also possible to notice how trends in the NBA have changed over the years. In recent years, rule changes and playing styles have led to a change in team statistics. This can be evidenced by looking at the average PPG for all teams over the 9 seasons that were evaluated (image below). This increase in average PPG is likely due to increased three-point shooting, teams playing at a faster pace and a higher number of shooting fouls being called.
+During EDA, it was also possible to notice how trends in the NBA have changed over the years. In recent years, rule changes and playing styles have led to a change in team statistics. This can be evidenced by looking at the average PPG for all teams over the 9 seasons that were evaluated (image below). This increase in average PPG is likely due to increased three-point shooting, teams playing at a faster pace and a higher number of shooting fouls being called. Because of these changing trends in play style, it was decided not to include game data from before the 2013 season, as features could have a different degree of importance back then. 
 ![Average points scored per game in each season](saves/images/ppg_seasons.png)
 
 The hypothesis that teams that can score efficiently are more likely to win was also tested. In fact, not only offense-related statistics (ORtg and TS%) were used in this exercise, but also defensive stats (DRtg), turnover percentage (number of turnovers in 100 possessions - TOV%), and offensive and defensive rebound percentage (ORB% and DRB%, respectively). For this qualitative exercise, first a team ranking based on win percentage was created for each season. Then, a team ranking for each of the team statistics mentioned above was created (advanced stat ranking). Then, the average rank differential is calculated as the difference between a team's position in the win percentage and a given advance stat ranking. For example, the Raptors ranked 12th in wins, 16th in offensive rating and 10th in defensive rating. Toronto's rank differential would be 4 in offensive rating and 2 in defensive rating. Finally, we also calculated the average number of playoff teams that also ranked in the top 10 for each advanced stat. The results are presented in the table below.  
@@ -65,7 +63,7 @@ This problem was approached as a supervised learning problem. The label was the 
 
 Separate models were created using regular and advanced team statistics. Below is a list of the statistics that were used in each case:
 
-* **Regular statistics:**
+* **Regular team statistics:**
     * `FG%`: field goal percentage 
     * `3P%`: three-point field goal percentage 
     * `2P%`: two-point field goal percentage 
@@ -80,7 +78,7 @@ Separate models were created using regular and advanced team statistics. Below i
     * `PF`: personal fouls per game 
     * `PTS`: points per game
     
-* **Advanced statistics:**  
+* **Advanced team statistics:**  
     * `ORtg`: offensive rating
     * `DRtg`: defensive rating
     * `TS%`: true shooting percentage
@@ -92,10 +90,44 @@ Different classification algorithms were used with the above datasets.  Below is
 
 * Logistic Regression
 * Random Forest Classifier
-* Support Vector Machines
+* Support Vector Machines (SVM)
 * Gaussian Naïve Bayes
 * XGBoost Classifier
 
 In all cases, model performance was evaluated by looking at the accuracy. A 10-fold cross-validation was performed to evaluate the accuracy score. To optimize each model, hyperparameter tuning was done by using `GridSearchCV` and `RandomizedSearchCV`.
 
 ## Results and Discussion 
+### Regular Team Statistics
+The first attempts at building a predictive model focused on using regular team statistics. As previously mentioned, this was done with and without undersampling the majority class. A compilation of the accuracy score for all algorithms is presented below. Undersampling the dataset actually resulted in worse performance. Out of all algorithms, SVM and Logistic Regression showed the best performance, with 65.9% and 65.5% accuracy, respectively. This simple model is already markedly better than random choice (50%).
+
+|               | Original Dataset |       |   | Undersampled Dataset |       |
+|---------------|------------------|-------|---|----------------------|-------|
+|               | Accuracy         | STD   |   | Accuracy             | STD   |
+| Log. Reg.     | 0.655            | 0.016 |   | 0.649                | 0.027 |
+| Random Forest  | 0.651            | 0.024 |   | 0.635                | 0.030 |
+| SVM           | 0.659            | 0.015 |   | 0.647                | 0.027 |
+| Naive Bayes   | 0.634            | 0.019 |   | 0.632                | 0.033 |
+| XGBClassifier | 0.625            | 0.031 |   | 0.611                | 0.031 |
+
+The problem with regular team statistics is that often they do not capture nuances in a team's play. For example, a team that does not have great three-point shooting may still be a decent offensive team. This can be overcome by looking at true shooting percentage. Another example is that points per game alone is not a good indicative of a team's offensive capabilities, as teams that play at a slower pace may be penalized in that category. Therefore, we would expect a better performance by using advanced team statistics. 
+
+### Advanced Team Statistics
+When working with advanced team statistics, a smaller number of features was used. This is because there are many overlapping advanced statistics, such as true shooting percentage and effective field goal percentage. Adding overlapping features to the model could result in worse performance due to increased noise.
+
+A compilation of the accuracy scores for the different algorithms used is shown in the table below. For better clarity, an barplot showing the mean accuracy scores and STD is show as well. In general, the accuracy scores using advanced statistics are about 2-3% better than when using regular statistics. Again, SVM and Logistic Regression are the best performing models (67.4% and 67.2%, respectively). As for the case of regular team statistics, undersampling also resulted in worse performance. The maximum accuracy achieved 67.4% ranks well compared to other models available in the literature - the best performing models have accuracy scores in the low 70s.
+
+|               | Original Dataset |       |   | Undersampled Dataset |       |
+|---------------|------------------|-------|---|----------------------|-------|
+|               | Accuracy         | STD   |   | Accuracy             | STD   |
+| Log. Reg.     | 0.672            | 0.026 |   | 0.654                | 0.014 |
+| Random Forest | 0.660            | 0.024 |   | 0.644                | 0.025 |
+| SVM           | 0.674            | 0.025 |   | 0.652                | 0.016 |
+| Naive Bayes   | 0.666            | 0.024 |   | 0.648                | 0.020 |
+| XGBClassifier | 0.651            | 0.018 |   | 0.624                | 0.032 |
+
+![Mean accuracy scores and standard deviation for different ML algorithms](saves/images/mean_accuracy.png)
+
+Different approaches were taken to try to improve the performance of the advanced statistics SVM and Logistic Regression models. For example, reducing the dataset to a smaller time window and selecting the most meaningful features (using `SelectKBest`). However, it was not possible to achieve higher accuracy using these methods. 
+
+# Conclusion
+Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4%. This model used a total of 12 features, 6 corresponding to the visitor team, and 6 corresponding to the away team. This accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
