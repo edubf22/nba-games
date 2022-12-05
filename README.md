@@ -60,9 +60,12 @@ The hypothesis that teams that can score efficiently are more likely to win was 
 The above exercise is purely qualitative, but it is still possible to see that some categories matter more when it comes to winning. For example, TS% shows a small average rank differential, indicating that teams which score the ball efficiently are more likely to win games. This is also highlighted by the average number of playoff teams in the top of this category (9.14). On the other hand, TOV% does not seem to be as impactful in predicting if a team is successful, given that it has higher average rank differential and that the average number of playoff teams in the top 10 of this category is lower than for TS%.
 
 # Predictive Model
-This problem was approached as a supervised learning model. The label was the outcome of the game (`H_win` - home team win), and the features were the team statistics for both the visitor and home team. Separate models were created using regular and advanced team statistics. Below is a list of the statistics that were used in each case:
+## Methodology
+This problem was approached as a supervised learning problem. The label was the outcome of the game (`H_win` - home team win), making this a classification problem. The features used were the team statistics for both the visitor and home team. Since the home team wins more frequently than the visitor team in the NBA, undersampling of the majority class (`H_win = 1`) was also employed to determine if this is a deciding factor. 
 
-* Regular statistics: 
+Separate models were created using regular and advanced team statistics. Below is a list of the statistics that were used in each case:
+
+* **Regular statistics:**
     * `FG%`: field goal percentage 
     * `3P%`: three-point field goal percentage 
     * `2P%`: two-point field goal percentage 
@@ -77,8 +80,7 @@ This problem was approached as a supervised learning model. The label was the ou
     * `PF`: personal fouls per game 
     * `PTS`: points per game
     
-
-* Advanced statistics:  
+* **Advanced statistics:**  
     * `ORtg`: offensive rating
     * `DRtg`: defensive rating
     * `TS%`: true shooting percentage
@@ -86,4 +88,14 @@ This problem was approached as a supervised learning model. The label was the ou
     * `ORB%`: offensive rebound rate
     * `DRB%`: defensive rebound rate
 
-Different classification algorithms were used with the above datasets. 
+Different classification algorithms were used with the above datasets.  Below is a list of the algorithms employed:
+
+* Logistic Regression
+* Random Forest Classifier
+* Support Vector Machines
+* Gaussian Naïve Bayes
+* XGBoost Classifier
+
+In all cases, model performance was evaluated by looking at the accuracy. A 10-fold cross-validation was performed to evaluate the accuracy score. To optimize each model, hyperparameter tuning was done by using `GridSearchCV` and `RandomizedSearchCV`.
+
+## Results and Discussion 
