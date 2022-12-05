@@ -4,6 +4,19 @@ Final project as part of the Lighthouse Labs Data Science Bootcamp. Data used in
 # Goals
  1. Build a machine learning model capable of predicting the outcome of NBA matches. 
 
+# Navigating this Repo
+── `data/`: contains all raw data
+
+── `notebooks/`: notebooks containing data preparation, EDA and modelling steps
+
+── `saves/`: all processed data, visualizations and metrics that was generated from raw data
+
+── `saves/eval/`: .csv files containing mean accuracy scores and standard deviation 
+
+── `saves/images/`: all visualizations used in this report
+
+── `saves/processed/`: processed data saved in .csv format
+
 # Introduction and Motivation
 The NBA is the main basketball league around the world. The league consists of 30 teams divided into two conferences, and a team plays every other team at least twice. Overall, each team plays a total of 82 games over the course of the regular season. 
 
