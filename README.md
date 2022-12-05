@@ -3,7 +3,6 @@ Final project as part of the Lighthouse Labs Data Science Bootcamp. Data used in
 
 # Goals
  1. Build a machine learning model capable of predicting the outcome of NBA matches. 
- 2. Create a model capable of predicting the win percentage of a given team based on advanced team statistics.
 
 # Introduction and Motivation
 The NBA is the main basketball league around the world. The league consists of 30 teams divided into two conferences, and a team plays every other team at least twice. Overall, each team plays a total of 82 games over the course of the regular season. 
@@ -23,8 +22,8 @@ For team win percentage prediction, only advanced team statistics was used. In t
 Before actually working with the data, several hypotheses of what impacts game results were proposed: 
 * Teams playing at home are more likely to win
 * Higher efficiency when shooting (higher 2P%, 3P% or TS%) indicates teams that are more likely to win
-* Teams that score a lot in a game are more likely to win (PPG or Offensive Rating - ORTG)
-* Teams with strong defensive performances (Defensive Rating - DRTG) are more likely to win
+* Teams that score a lot in a game are more likely to win (PPG or Offensive Rating - ORtg)
+* Teams with strong defensive performances (Defensive Rating - DRtg) are more likely to win
 
 One could consider the impact of these features in a machine learning model by looking at feature importance for a given model. It was also attempted to perform a qualitative analysis of these hypotheses during the exploratory data analysis (EDA) step. 
 
@@ -46,3 +45,45 @@ It is also interesting to look at the home and visitor wins in each season to ge
 
 During EDA, it was also possible to notice how trends in the NBA have changed over the years. In recent years, rule changes and playing styles have led to a change in team statistics. This can be evidenced by looking at the average PPG for all teams over the 9 seasons that were evaluated (image below). This increase in average PPG is likely due to increased three-point shooting, teams playing at a faster pace and a higher number of shooting fouls being called.
 ![Average points scored per game in each season](saves/images/ppg_seasons.png)
+
+The hypothesis that teams that can score efficiently are more likely to win was also tested. In fact, not only offense-related statistics (ORtg and TS%) were used in this exercise, but also defensive stats (DRtg), turnover percentage (number of turnovers in 100 possessions - TOV%), and offensive and defensive rebound percentage (ORB% and DRB%, respectively). For this qualitative exercise, first a team ranking based on win percentage was created for each season. Then, a team ranking for each of the team statistics mentioned above was created (advanced stat ranking). Then, the average rank differential is calculated as the difference between a team's position in the win percentage and a given advance stat ranking. For example, the Raptors ranked 12th in wins, 16th in offensive rating and 10th in defensive rating. Toronto's rank differential would be 4 in offensive rating and 2 in defensive rating. Finally, we also calculated the average number of playoff teams that also ranked in the top 10 for each advanced stat. The results are presented in the table below.  
+
+|                 | Avg. Rank Differential | Avg. # PO Teams in Top 10 |
+|-----------------|------------------------|---------------------------|
+| Off. Rating     |          4.39          |            8.86           |
+| Def. Rating     |          4.93          |            8.71           |
+| True Shooting % |          4.88          |            9.14           |
+| Turnover %      |          8.57          |            6.57           |
+| Off. Rebound %  |          10.03         |            5.42           |
+| Def. Rebound %  |          8.71          |            6.14           |
+
+The above exercise is purely qualitative, but it is still possible to see that some categories matter more when it comes to winning. For example, TS% shows a small average rank differential, indicating that teams which score the ball efficiently are more likely to win games. This is also highlighted by the average number of playoff teams in the top of this category (9.14). On the other hand, TOV% does not seem to be as impactful in predicting if a team is successful, given that it has higher average rank differential and that the average number of playoff teams in the top 10 of this category is lower than for TS%.
+
+# Predictive Model
+This problem was approached as a supervised learning model. The label was the outcome of the game (`H_win` - home team win), and the features were the team statistics for both the visitor and home team. Separate models were created using regular and advanced team statistics. Below is a list of the statistics that were used in each case:
+
+* Regular statistics: 
+    * `FG%`: field goal percentage 
+    * `3P%`: three-point field goal percentage 
+    * `2P%`: two-point field goal percentage 
+    * `FT%`: free-throw shooting percentage 
+    * `ORB`: offensive rebounds per game 
+    * `DRB`: defensive rebounds per game 
+    * `TRB`: total rebounds per game 
+    * `AST`: assists per game 
+    * `STL`: steals per game 
+    * `BLK`: blocks per game 
+    * `TOV`: turnovers per game 
+    * `PF`: personal fouls per game 
+    * `PTS`: points per game
+    
+
+* Advanced statistics:  
+    * `ORtg`: offensive rating
+    * `DRtg`: defensive rating
+    * `TS%`: true shooting percentage
+    * `TOV%`: turnover per 100 possessions
+    * `ORB%`: offensive rebound rate
+    * `DRB%`: defensive rebound rate
+
+Different classification algorithms were used with the above datasets. 
