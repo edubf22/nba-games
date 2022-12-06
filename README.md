@@ -3,6 +3,7 @@ Final project as part of the Lighthouse Labs Data Science Bootcamp. Data used in
 
 # Goals
  1. Build a machine learning model capable of predicting the outcome of NBA matches. 
+ 2. Deploy the model by creating a Streamlit app.
 
 # Navigating this Repo
 ── [`data/`](data): contains all raw data
@@ -158,4 +159,4 @@ At the current stage, the user needs to input the data manually for each team ma
 ![Animated image showing how the deployed model works](saves/images/app_example.gif)
 
 # Conclusion
-Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4%. This model used a total of 12 features, 6 corresponding to the visitor team, and 6 corresponding to the away team. This accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
+Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4%. The model was deployed using a Streamlit app, although at the current stage it is only available locally. Nevertheless, this accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
