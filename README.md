@@ -5,19 +5,20 @@ Final project as part of the Lighthouse Labs Data Science Bootcamp. Data used in
  1. Build a machine learning model capable of predicting the outcome of NBA matches. 
 
 # Navigating this Repo
-── `data/`: contains all raw data
+── [`data/`](data): contains all raw data
 
-── `notebooks/`: notebooks containing data preparation, EDA and modelling steps
+── [`notebooks/`](notebooks): notebooks containing data preparation, EDA and modelling steps
 
-── `saves/`: all processed data, visualizations and metrics that was generated from raw data
+── [`saves/eval/`](saves/eval): .csv files containing mean accuracy scores and standard deviation 
 
-── `saves/eval/`: .csv files containing mean accuracy scores and standard deviation 
+── [`saves/images/`](saves/images): all visualizations used in this report
 
-── `saves/images/`: all visualizations used in this report
+── [`saves/processed/`](saves/processed): processed data saved in .csv format
 
-── `saves/processed/`: processed data saved in .csv format
+── [`saves/resources/`](saves/resources): resources from different used throughout this repo, including images. 
 
 # Introduction and Motivation
+![Image with all NBA team logos](saves/resources/team_logos.png)
 The NBA is the main basketball league around the world. The league consists of 30 teams divided into two conferences, and a team plays every other team at least twice. Overall, each team plays a total of 82 games over the course of the regular season. 
 
 A lot of data can be generated during NBA games, for example player and team statistics. This data can be used in several different areas, from player performance analysis to devising a team's strategy against specific opponents. Another area where analyzing NBA data has become important is in the betting industry. A report from 2018 indicated that the NBA could gain an additional $585 million dollars [thanks to legal betting](https://www.legalsportsreport.com/25173/aga-survey-mlb-nba-sports-betting/?doing_wp_cron=1670105815.3058269023895263671875). As legal betting expands worldwide, betting companies could employ machine learning models to offer a fair betting process. 
