@@ -145,5 +145,14 @@ A compilation of the accuracy scores for the different algorithms used is shown 
 
 Different approaches were taken to try to improve the performance of the advanced statistics SVM and Logistic Regression models. For example, reducing the dataset to a smaller time window and selecting the most meaningful features (using `SelectKBest`). However, it was not possible to achieve higher accuracy using these methods. 
 
+# Model Deployment (in progress)
+The model selected for deployment was the SVM model based on advanced team statistics. This model will be used to predict the outcomes of the current NBA season (2022-2023), and this work is still in progress. Below is an outline of how an application using this model could be designed:
+
+- Advanced team statistics are updated daily 
+- User could input the teams that are facing each other, or games of the day could be presented in the page application page
+- In either case, application would return the team that is more likely to win. Example: Detroit Pistons @ Sacramento Kings -> Winner = Sacramento Kings
+
+Another idea would be to tweak the model to show probability of the home team winning or not based on the team stats. 
+
 # Conclusion
 Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4%. This model used a total of 12 features, 6 corresponding to the visitor team, and 6 corresponding to the away team. This accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
