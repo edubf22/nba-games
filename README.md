@@ -17,6 +17,8 @@ Final project as part of the Lighthouse Labs Data Science Bootcamp. Data used in
 
 ── [`saves/resources/`](saves/resources): resources from different used throughout this repo, including images. 
 
+── [`src/`](src): python script for Streamlit application and pickled files (functions, model, scaler).
+
 # Introduction and Motivation
 ![Image with all NBA team logos](saves/resources/team_logos.png)
 *Image credit: https://github.com/ChrisKatsaras/React-NBA-Logos* 
@@ -146,13 +148,14 @@ A compilation of the accuracy scores for the different algorithms used is shown 
 Different approaches were taken to try to improve the performance of the advanced statistics SVM and Logistic Regression models. For example, reducing the dataset to a smaller time window and selecting the most meaningful features (using `SelectKBest`). However, it was not possible to achieve higher accuracy using these methods. 
 
 # Model Deployment (in progress)
-The model selected for deployment was the SVM model based on advanced team statistics. This model will be used to predict the outcomes of the current NBA season (2022-2023), and this work is still in progress. Below is an outline of how an application using this model could be designed:
+The model selected for deployment was the SVM model based on advanced team statistics. Deployment was done using Streamlit and this work is still in progress. Below is an outline of how an application using this model could be designed:
 
 - Advanced team statistics are updated daily 
 - User could input the teams that are facing each other, or games of the day could be presented in the page application page
 - In either case, application would return the team that is more likely to win. Example: Detroit Pistons @ Sacramento Kings -> Winner = Sacramento Kings
 
-Another idea would be to tweak the model to show probability of the home team winning or not based on the team stats. 
+At the current stage, the user needs to input the data manually for each team manually. Once the user enters the data for both visiting and home teams, the application gives an outcome stating which team won. Since the model has only been deployed locally, a snippet of how it currently functions is shown in the animation below:
+![Animated image showing how the deployed model works](saves/images/app_example.gif)
 
 # Conclusion
 Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4%. This model used a total of 12 features, 6 corresponding to the visitor team, and 6 corresponding to the away team. This accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
