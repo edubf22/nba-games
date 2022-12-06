@@ -128,7 +128,7 @@ The first attempts at building a predictive model focused on using regular team 
 | Naive Bayes   | 0.634            | 0.019 |   | 0.632                | 0.033 |
 | XGBClassifier | 0.625            | 0.031 |   | 0.611                | 0.031 |
 
-The problem with regular team statistics is that often they do not capture nuances in a team's play. For example, a team that does not have great three-point shooting may still be a decent offensive team. This can be overcome by looking at true shooting percentage. Another example is that points per game alone is not a good indicative of a team's offensive capabilities, as teams that play at a slower pace may be penalized in that category. Therefore, better accuracy scores would be expected by using advanced team statistics. 
+The problem with regular team statistics is that often they do not capture nuances in a team's play. For example, a team that does not have great three-point shooting may still be a decent offensive team. This can be overcome by looking at true shooting percentage. Another example is that points per game alone is not a good indicative of a team's offensive capabilities, as teams that play at a slower pace may be penalized in that category. Therefore2 better accuracy scores would be expected by using advanced team statistics. 
 
 ### Advanced Team Statistics
 When working with advanced team statistics, a smaller number of features was used. This is because there are many overlapping advanced statistics, such as true shooting percentage and effective field goal percentage. Adding overlapping features to the model could result in worse performance due to increased noise.
@@ -159,4 +159,4 @@ At the current stage, the user needs to input the data manually for each team. O
 ![Animated image showing how the deployed model works](saves/images/app_example.gif)
 
 # Conclusion
-Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4%. The model was deployed using a Streamlit app, although at the current stage it is only available locally. Nevertheless, this accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
+Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, SVM using advanced team statistics showed the best performance with an average accuracy score of 67.2%. The model was deployed using a Streamlit app, although at the current stage it is only available locally. Nevertheless, this accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
