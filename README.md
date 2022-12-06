@@ -63,7 +63,7 @@ It is also interesting to look at the home and visitor wins in each season to ge
 During EDA, it was also possible to notice how trends in the NBA have changed over the years. In recent years, rule changes and playing styles have led to a change in team statistics. This can be evidenced by looking at the average PPG for all teams over the 9 seasons that were evaluated (image below). This increase in average PPG is likely due to increased three-point shooting, teams playing at a faster pace and a higher number of shooting fouls being called. Because of these changing trends in play style, it was decided not to include game data from before the 2013 season, as features could have a different degree of importance back then. 
 ![Average points scored per game in each season](saves/images/ppg_seasons.png)
 
-The hypothesis that teams that can score efficiently are more likely to win was also tested. In fact, not only offense-related statistics (ORtg and TS%) were used in this exercise, but also defensive stats (DRtg), turnover percentage (number of turnovers in 100 possessions - TOV%), and offensive and defensive rebound percentage (ORB% and DRB%, respectively). For this qualitative exercise, first a team ranking based on win percentage was created for each season. Then, a team ranking for each of the team statistics mentioned above was created (advanced stat ranking). Then, the average rank differential is calculated as the difference between a team's position in the win percentage and a given advance stat ranking. For example, the Raptors ranked 12th in wins, 16th in offensive rating and 10th in defensive rating. Toronto's rank differential would be 4 in offensive rating and 2 in defensive rating. Finally, we also calculated the average number of playoff teams that also ranked in the top 10 for each advanced stat. The results are presented in the table below.  
+The hypothesis that teams that can score efficiently are more likely to win was also tested. In fact, not only offense-related statistics (ORtg and TS%) were used in this exercise, but also defensive stats (DRtg), turnover percentage (number of turnovers in 100 possessions - TOV%), and offensive and defensive rebound percentage (ORB% and DRB%, respectively). For this qualitative exercise, first a team ranking based on win percentage was created for each season. Then, a team ranking for each of the team statistics mentioned above was created (advanced stat ranking). Then, the average rank differential is calculated as the difference between a team's position in the win percentage and a given advance stat ranking. For example, the Raptors ranked 12th in wins, 16th in offensive rating and 10th in defensive rating. Toronto's rank differential would be 4 in offensive rating and 2 in defensive rating. Finally, the average number of playoff teams that also ranked in the top 10 for each advanced stat was calculated. The results are presented in the table below.  
 
 |                 | Avg. Rank Differential | Avg. # PO Teams in Top 10 |
 |-----------------|------------------------|---------------------------|
@@ -128,19 +128,19 @@ The first attempts at building a predictive model focused on using regular team 
 | Naive Bayes   | 0.634            | 0.019 |   | 0.632                | 0.033 |
 | XGBClassifier | 0.625            | 0.031 |   | 0.611                | 0.031 |
 
-The problem with regular team statistics is that often they do not capture nuances in a team's play. For example, a team that does not have great three-point shooting may still be a decent offensive team. This can be overcome by looking at true shooting percentage. Another example is that points per game alone is not a good indicative of a team's offensive capabilities, as teams that play at a slower pace may be penalized in that category. Therefore, we would expect a better performance by using advanced team statistics. 
+The problem with regular team statistics is that often they do not capture nuances in a team's play. For example, a team that does not have great three-point shooting may still be a decent offensive team. This can be overcome by looking at true shooting percentage. Another example is that points per game alone is not a good indicative of a team's offensive capabilities, as teams that play at a slower pace may be penalized in that category. Therefore, better accuracy scores would be expected by using advanced team statistics. 
 
 ### Advanced Team Statistics
 When working with advanced team statistics, a smaller number of features was used. This is because there are many overlapping advanced statistics, such as true shooting percentage and effective field goal percentage. Adding overlapping features to the model could result in worse performance due to increased noise.
 
-A compilation of the accuracy scores for the different algorithms used is shown in the table below. For better clarity, an barplot showing the mean accuracy scores and STD is show as well. In general, the accuracy scores using advanced statistics are about 2-3% better than when using regular statistics. Again, SVM and Logistic Regression are the best performing models (67.4% and 67.2%, respectively). As for the case of regular team statistics, undersampling also resulted in worse performance. The maximum accuracy achieved 67.4% ranks well compared to other models available in the literature - the best performing models have accuracy scores in the low 70s.
+A compilation of the accuracy scores for the different algorithms used is shown in the table below. For better clarity, an barplot showing the mean accuracy scores and STD is show as well. In general, the accuracy scores using advanced statistics are about 2-3% better than when using regular statistics. Again, Logistic Regression and SVM are the best performing models (67.4% and 67.2%, respectively). As for the case of regular team statistics, undersampling also resulted in worse performance. The maximum accuracy achieved 67.4% ranks well compared to other models available in the literature - the best performing models have accuracy scores in the low 70s.
 
 |               | Original Dataset |       |   | Undersampled Dataset |       |
 |---------------|------------------|-------|---|----------------------|-------|
 |               | Accuracy         | STD   |   | Accuracy             | STD   |
-| Log. Reg.     | 0.672            | 0.026 |   | 0.654                | 0.014 |
-| Random Forest | 0.660            | 0.024 |   | 0.644                | 0.025 |
-| SVM           | 0.674            | 0.025 |   | 0.652                | 0.016 |
+| Log. Reg.     | 0.674            | 0.026 |   | 0.654                | 0.014 |
+| Random Forest | 0.660            | 0.022 |   | 0.644                | 0.025 |
+| SVM           | 0.672            | 0.026 |   | 0.652                | 0.016 |
 | Naive Bayes   | 0.666            | 0.024 |   | 0.648                | 0.020 |
 | XGBClassifier | 0.651            | 0.018 |   | 0.624                | 0.032 |
 
@@ -149,13 +149,13 @@ A compilation of the accuracy scores for the different algorithms used is shown 
 Different approaches were taken to try to improve the performance of the advanced statistics SVM and Logistic Regression models. For example, reducing the dataset to a smaller time window and selecting the most meaningful features (using `SelectKBest`). However, it was not possible to achieve higher accuracy using these methods. 
 
 # Model Deployment (in progress)
-The model selected for deployment was the SVM model based on advanced team statistics. Deployment was done using Streamlit and this work is still in progress. Below is an outline of how an application using this model could be designed:
+The model selected for deployment was the SVM model trained on advanced team statistics. Deployment was done using a Streamlit application. This work is still in progress, but below is an example of how an application using this model could be designed:
 
 - Advanced team statistics are updated daily 
 - User could input the teams that are facing each other, or games of the day could be presented in the page application page
 - In either case, application would return the team that is more likely to win. Example: Detroit Pistons @ Sacramento Kings -> Winner = Sacramento Kings
 
-At the current stage, the user needs to input the data manually for each team manually. Once the user enters the data for both visiting and home teams, the application gives an outcome stating which team won. Since the model has only been deployed locally, a snippet of how it currently functions is shown in the animation below:
+At the current stage, the user needs to input the data manually for each team. Once the user enters the data for both visitor and home teams, the application gives an outcome stating which team won. Since the model has only been deployed locally, a snippet of how it currently functions is shown in the animation below:
 ![Animated image showing how the deployed model works](saves/images/app_example.gif)
 
 # Conclusion
