@@ -50,7 +50,7 @@ def main():
 
     # Input fields - get from user
     ORtg_V = st.sidebar.number_input('Offensive Rating (ORtg) - Visitor (e.g. 115)')
-    DRtg_V = st.sidebar.number_input('Defensive Rating (DRtg)- Visitor (e.g. 110)')
+    DRtg_V = st.sidebar.number_input('Defensive Rating (DRtg) - Visitor (e.g. 110)')
     TS_V = st.sidebar.number_input('True Shooting % (TS%) - Visitor (e.g. 0.60)')
     TOV_V = st.sidebar.number_input('Turnovers per 100 Possessions (TOV%) - Visitor (e.g. 13)')
     ORB_V = st.sidebar.number_input('Offensive Rebound % (ORB%) - Visitor (e.g. 20)')
