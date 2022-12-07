@@ -39,6 +39,8 @@ def nba_match_prediction(input_data):
         return 'And the home team wins!'
 
 def main():
+    # Page config
+    st.set_page_config(page_title='NBA Predictions', page_icon=':basketball:')
 
     # Page title
     st.title('NBA Game Outcome Prediction')
