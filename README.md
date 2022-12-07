@@ -156,6 +156,7 @@ The model selected for deployment was the SVM model trained on advanced team sta
 - In either case, application would return the team predicted to win. Example: Detroit Pistons @ Sacramento Kings -> Winner = Sacramento Kings
 
 At the current stage, the user needs to input the data manually for each team. Once the user enters the data for both visitor and home teams, the application gives an outcome stating which team won. The model can be accessed in this [link](https://nba-prediction-with-edu.streamlit.app/), and a snippet of how it currently functions is shown in the animation below:
+
 ![Animated image showing how the deployed model works](saves/images/app_example.gif)
 
 # Conclusion
