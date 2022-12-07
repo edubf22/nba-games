@@ -42,9 +42,10 @@ def main():
 
     # Page title
     st.title('NBA Game Outcome Prediction')
+    st.st.subheader("By Eduardo (Edu) Ferreira")
     st.write('Enter the stats for the visitor and home teams and get a prediction of who will win the game!')
     st.write('At the current stage, the stats need to be entered manually. You can find the stats in the folloing page: [Basketball-Reference](https://www.basketball-reference.com/leagues/NBA_2023.html)')
-    
+    st.set_page_config(page_title="NBA Predictions", page_icon=":basketball:", layout="centered")
 
     # Input fields - get from user
     ORtg_V = st.sidebar.number_input('Visitor Offensive Rating (e.g. 115)')
