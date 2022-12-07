@@ -1,5 +1,4 @@
 streamlit
-pandas
 dill
-scikit-learn
+scikit-learn==1.1.2
 numpy
