@@ -7,7 +7,7 @@ import pickle
 import streamlit as st
 
 # Loading model 
-loaded_model = pickle.load(open('../src/nba_game_prediction.pkl', 'rb'))
+model = pickle.load(open('../src/nba_game_prediction.pkl', 'rb'))
 
 # Loading scaler
 scaler = pickle.load(open('../src/scaler.pkl', 'rb'))
@@ -30,7 +30,7 @@ def nba_match_prediction(input_data):
     # Scale the input data
     input_scaled = scaler.transform(input_reshaped)
 
-    prediction = loaded_model.predict(input_scaled)
+    prediction = model.predict(input_scaled)
     print(prediction)
 
     if prediction[0] == 0:
