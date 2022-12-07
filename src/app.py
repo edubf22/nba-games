@@ -47,14 +47,14 @@ def main():
     
 
     # Input fields - get from user
-    ORtg_V = st.sidebar.number_input('Visitor Offensive Rating')
-    DRtg_V = st.sidebar.number_input('Visitor Defensive Rating')
+    ORtg_V = st.sidebar.number_input('Visitor Offensive Rating (e.g. 115)')
+    DRtg_V = st.sidebar.number_input('Visitor Defensive Rating (e.g. 110)')
     TS_V = st.sidebar.number_input('Visitor True Shooting % (e.g. 0.60)')
     TOV_V = st.sidebar.number_input('Visitor Turnovers per 100 Possessions')
     ORB_V = st.sidebar.number_input('Visitor Offensive Rebound % (e.g. 20)')
     DRB_V = st.sidebar.number_input('Visitor Defensive Rebound % (e.g. 79)')
-    ORtg_H = st.sidebar.number_input('Home Offensive Rating')
-    DRtg_H = st.sidebar.number_input('Home Defensive Rating')
+    ORtg_H = st.sidebar.number_input('Home Offensive Rating (e.g. 115)')
+    DRtg_H = st.sidebar.number_input('Home Defensive Rating (e.g. 110)')
     TS_H = st.sidebar.number_input('Home True Shooting % (e.g. 0.60)')
     TOV_H = st.sidebar.number_input('Home Turnovers per 100 Possessions')
     ORB_H = st.sidebar.number_input('Home Offensive Rebound % (e.g. 20)')
