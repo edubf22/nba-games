@@ -43,20 +43,22 @@ def main():
     # Page title
     st.title('NBA Game Outcome Prediction')
     st.write('Enter the stats for the visitor and home teams and get a prediction of who will win the game!')
+    st.write('At the current stage, the stats need to be entered manually. You can find the stats in the folloing page: [Basketball-Reference](https://www.basketball-reference.com/leagues/NBA_2023.html)')
+    
 
     # Input fields - get from user
     ORtg_V = st.sidebar.number_input('Visitor Offensive Rating')
     DRtg_V = st.sidebar.number_input('Visitor Defensive Rating')
-    TS_V = st.sidebar.number_input('Visitor True Shooting Percentage')
+    TS_V = st.sidebar.number_input('Visitor True Shooting % (e.g. 0.60)')
     TOV_V = st.sidebar.number_input('Visitor Turnovers per 100 Possessions')
-    ORB_V = st.sidebar.number_input('Visitor Offensive Rebound Percentage')
-    DRB_V = st.sidebar.number_input('Visitor Defensive Rebound Percentage')
+    ORB_V = st.sidebar.number_input('Visitor Offensive Rebound % (e.g. 20)')
+    DRB_V = st.sidebar.number_input('Visitor Defensive Rebound % (e.g. 79)')
     ORtg_H = st.sidebar.number_input('Home Offensive Rating')
     DRtg_H = st.sidebar.number_input('Home Defensive Rating')
-    TS_H = st.sidebar.number_input('Home True Shooting Percentage')
+    TS_H = st.sidebar.number_input('Home True Shooting % (e.g. 0.60)')
     TOV_H = st.sidebar.number_input('Home Turnovers per 100 Possessions')
-    ORB_H = st.sidebar.number_input('Home Offensive Rebound Percentage')
-    DRB_H = st.sidebar.number_input('Home Defensive Rebound Percentage')
+    ORB_H = st.sidebar.number_input('Home Offensive Rebound % (e.g. 20)')
+    DRB_H = st.sidebar.number_input('Home Defensive Rebound % (e.g. 79)')
 
     # Prediction block
     outcome = ''
