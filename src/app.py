@@ -3,7 +3,7 @@ Basic idea for a Streamlit application to be used for ML model deployment
 """
 
 import numpy as np
-import pickle 
+import dill as pickle
 import streamlit as st
 
 # Loading model 
