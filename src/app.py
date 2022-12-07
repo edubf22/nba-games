@@ -7,10 +7,10 @@ import pickle
 import streamlit as st
 
 # Loading model 
-model = pickle.load(open('/src/nba_game_prediction.pkl', 'rb'))
+model = pickle.load(open('src/nba_game_prediction.pkl', 'rb'))
 
 # Loading scaler
-scaler = pickle.load(open('/src/scaler.pkl', 'rb'))
+scaler = pickle.load(open('src/scaler.pkl', 'rb'))
 
 # Create a function for prediction
 
