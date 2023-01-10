@@ -161,3 +161,9 @@ At the current stage, the user needs to input the data manually for each team. O
 
 # Conclusion
 Different machine learning algorithms were used in an attempt to predict the outcome of NBA matches. Out of all models, Logstistic Regression and SVM using advanced team statistics showed the best performance with an average accuracy score of 67.4% and 67.2%, respectively. The model was deployed using a Streamlit app, although at the current stage the user needs to input the team stats manually. Finally, this accuracy score is comparable to other models reported in the literature. As such, this model could be realistically used for predicting the outcome of future NBA games. 
+
+# Future Work
+A few things that I didn't try, but that would be nice additions to this project:
+* Running a statistical test such as ANOVA to see if the difference in accuracy between different algorithms is statistically significant
+* Automating the data acquisition step and streamlining the process
+* Consider ways of storing the data, such as a relational database
